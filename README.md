@@ -1,7 +1,7 @@
 Java Practical Programs
 Name: Soni Jeet
 Roll No: 92500527104
-Course: BCA - Semester 3C
+Course: BCA - Semester 3C.
 Subject: DBMS
 Professor: Sanket sir
 
