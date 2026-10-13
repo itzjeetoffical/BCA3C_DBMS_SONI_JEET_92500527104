@@ -1,0 +1,25 @@
+-- Name: Ausura Keshar
+-- Enrollment No.: 92500527109
+-- Program Name: Copy EMP Values to NEWEMP After Insert
+
+-- Create the NEWEMP table with the same columns as EMP.
+-- Run this CREATE TABLE statement only once.
+CREATE TABLE NEWEMP AS
+SELECT * FROM EMP WHERE 1 = 0;
+
+CREATE OR REPLACE TRIGGER copy_emp_after_insert
+AFTER INSERT ON EMP
+FOR EACH ROW
+BEGIN
+    INSERT INTO NEWEMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+    VALUES (:NEW.EMPNO, :NEW.ENAME, :NEW.JOB, :NEW.MGR,
+            :NEW.HIREDATE, :NEW.SAL, :NEW.COMM, :NEW.DEPTNO);
+END;
+/
+
+-- Test the trigger
+INSERT INTO EMP (EMPNO, ENAME, JOB, HIREDATE, SAL, DEPTNO)
+VALUES (9001, 'TESTUSER', 'CLERK', SYSDATE, 15000, 10);
+
+-- Check copied row
+SELECT * FROM NEWEMP WHERE EMPNO = 9001;
